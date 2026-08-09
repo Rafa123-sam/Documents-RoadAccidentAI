@@ -176,7 +176,8 @@ class UltralyticsYOLODetector(BaseDetector):
             torch.cuda.empty_cache()
 
         LOGGER.info("YOLO detector unloaded.")
-        def detect(
+
+    def detect(
         self,
         frame: np.ndarray,
     ) -> DetectionResult:
@@ -300,50 +301,6 @@ class UltralyticsYOLODetector(BaseDetector):
         Args:
             image_size:
                 Height and width of the dummy image.
-        """
-
-        if not self._loaded:
-            return
-
-        dummy = np.zeros(
-            (
-                image_size[0],
-                image_size[1],
-                3,
-            ),
-            dtype=np.uint8,
-        )
-
-        self.detect(dummy)
-
-    def __repr__(
-        self,
-    ) -> str:
-        """
-        Return string representation.
-        """
-
-        return (
-            f"{self.__class__.__name__}("
-            f"model_path='{self._model_path}', "
-            f"device='{self._device}', "
-            f"loaded={self._loaded}, "
-            f"confidence={self._confidence:.2f}, "
-            f"iou={self._iou:.2f})"
-        )    
-        def warmup(
-        self,
-        image_size: tuple[int, int] = (
-            640,
-            640,
-        ),
-    ) -> None:
-        """
-        Warm up the detector with a dummy inference.
-
-        Args:
-            image_size:
-                Dummy image size (height, width).
         """
 
         if not self._loaded:
